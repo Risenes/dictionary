@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Словарь</title>
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header"></header>
+		<main class="page">
+			<div class="content">
+				<div class="container">
+
+					<div class="content__body">
+						<form method="post" name="kanzi__form">
+							<div id="selectKanzi" class="select__kanzi">Введите кандзи <input size="20" name="selectKanzi"
+									class="input__kanzi">
+							</div>
+						</form>
+						<div class="btnkanzi"><input type="button" class="btn__kanzi" value="Отправить" onclick="getKanzi();"></div>
+						<div class="found__kanzi" id="found__kanzi"></div>
+						<div class="modal__body" id="myModal">
+							<span class="close">&times;</span>
+							<img class="modal__image" id="modal__image">
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="footer"></footer>
+	</div>
+	<script src="script/script.js"></script>
+</body>
+
+</html>
