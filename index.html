@@ -20,15 +20,12 @@
 					<div class="content__body">
 						<form method="post" name="kanzi__form">
 							<div id="selectKanzi" class="select__kanzi">Введите кандзи <input size="20" name="selectKanzi"
-									class="input__kanzi">
+									class="input__kanzi" id="input__kanzi">
 							</div>
 						</form>
-						<div class="btnkanzi"><input type="button" class="btn__kanzi" value="Отправить" onclick="getKanzi();"></div>
+						<div class="btnkanzi"><input type="button" class="btn__kanzi" id="btn" value="Найти" onclick="getKanzi();"
+								disabled></div>
 						<div class="found__kanzi" id="found__kanzi"></div>
-						<div class="modal__body" id="myModal">
-							<span class="close">&times;</span>
-							<img class="modal__image" id="modal__image">
-						</div>
 					</div>
 				</div>
 			</div>
