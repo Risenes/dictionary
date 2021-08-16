@@ -707,8 +707,17 @@ input.addEventListener('input', () => {
 	submitBtn.disabled = !isValid(input.value)
 })
 
+const params = decodeURI(document.location.search)
+document.kanzi__form.selectKanzi.value = (params.substr(7)).split('&')
+
 function getKanzi() {
 	let text = document.kanzi__form.selectKanzi.value.toLocaleLowerCase();
+	let url = new URL (location.protocol + '//' + location.host + location.pathname)
+	url.searchParams.append("kanzi", text)
+	window.history.pushState({}, null, url)
+	
+	// window.location.replace(url)
+	// console.log(url.search)
 	
 	const replace = (c) => replaces.get(c) ?? c
 
@@ -723,15 +732,11 @@ function getKanzi() {
 		char: c,
 		page: dictionary.find(p => p.toLocaleLowerCase().includes(replace(c)))
 	}))
-	console.log(result)
 
 	// const replace = (c) => replaces.get(c) ?? c
 	// console.log(replace(result.page))
 
 	const distinctPage = [... new Set(result.map(x => x.page))];
-	console.log(distinctPage)
-
-	
 
 	for (i = 0; i < distinctPage.length; ++i) {
 		let pic = document.createElement('img');
