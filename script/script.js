@@ -707,16 +707,17 @@ const replaces = new Map([
 // 	submitBtn.disabled = !isValid(input.value)
 // })
 
-const params = decodeURI(document.location.search)
-document.kanzi__form.selectKanzi.value = (params.substr(3)).split('&')
-
+// const params = decodeURI(document.location.search)
+let url = new URL (window.location.href)
+document.kanzi__form.input__kanzi.value = url.searchParams.get('q')
+// (params.substr(10)).split('&')
 var ele = document.getElementById("myForm");
 if(ele.addEventListener){
     ele.addEventListener("submit", getKanzi(), false);
 }
 
 function getKanzi() {
-	let text = document.kanzi__form.selectKanzi.value.toLocaleLowerCase();
+	let text = document.kanzi__form.input__kanzi.value.toLocaleLowerCase();
 	let url = new URL (location.protocol + '//' + location.host + location.pathname)
 	url.searchParams.append("q", text)
 	window.history.pushState({}, null, url)
