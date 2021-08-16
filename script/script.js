@@ -696,9 +696,9 @@ const dictionary = ["一.jpg", "右.jpg", "雨.jpg", "円.jpg", "王.jpg", "音.
 const replaces = new Map([
   ['が','か'], ['ぎ','き'],　['ぐ','く'], ['げ','け'], ['ご','こ'], ['だ','た'], ['ぢ','ち'], ['づ','つ'], ['で','て'], ['ど','と'], ['ざ','さ'], ['じ','し'], ['ず','す'], ['ぜ','せ'], ['ぞ','そ'], ['ば','は'], ['ぱ','は'], ['べ','へ'], ['ぺ','へ'], ['ぶ','ふ'], ['ぷ','ふ'], ['び','ひ'], ['ぴ','ひ'], ['ぼ','ほ'], ['ぽ','ほ'], ['ゃ','や'], ['ょ','よ'], ['ゅ','ゆ'], ['っ','つ'], ['ャ','ヤ'], ['ョ','ヨ'], ['ュ','ユ'], ['ッ','ツ'], ['ガ','カ'], ['ギ','キ'], ['グ','ク'], ['ゲ','ケ'], ['ゴ','コ'], ['ザ','サ'], ['ジ','シ'], ['ズ','ス'], ['ゼ','せ'], ['ゾ','ソ'], ['ダ','タ'], ['ヂ','チ'], ['ヅ','ツ'], ['デ','テ'], ['ド','ト'], ['バ','ハ'], ['ビ','ヒ'], ['ブ','フ'], ['ベ','ヘ'], ['ボ','ホ']])
 
-function isValid(value) {
-	return value.length >= 1
-}
+// function isValid(value) {
+// 	return value.length >= 1
+// }
 
 // const submitBtn = document.getElementById('btn');
 // const input = document.getElementById('input__kanzi')
@@ -710,12 +710,17 @@ function isValid(value) {
 const params = decodeURI(document.location.search)
 document.kanzi__form.selectKanzi.value = (params.substr(3)).split('&')
 
+var ele = document.getElementById("myForm");
+if(ele.addEventListener){
+    ele.addEventListener("submit", getKanzi(), false);
+}
+
 function getKanzi() {
 	let text = document.kanzi__form.selectKanzi.value.toLocaleLowerCase();
 	let url = new URL (location.protocol + '//' + location.host + location.pathname)
 	url.searchParams.append("q", text)
 	window.history.pushState({}, null, url)
-	
+	console.log(text)
 	// window.location.replace(url)
 	// console.log(url.search)
 	
