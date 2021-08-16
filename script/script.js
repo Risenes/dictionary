@@ -713,7 +713,7 @@ document.kanzi__form.selectKanzi.value = (params.substr(7)).split('&')
 function getKanzi() {
 	let text = document.kanzi__form.selectKanzi.value.toLocaleLowerCase();
 	let url = new URL (location.protocol + '//' + location.host + location.pathname)
-	url.searchParams.append("kanzi", text)
+	url.searchParams.append("q", text)
 	window.history.pushState({}, null, url)
 	
 	// window.location.replace(url)
