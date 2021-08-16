@@ -700,15 +700,15 @@ function isValid(value) {
 	return value.length >= 1
 }
 
-const submitBtn = document.getElementById('btn');
-const input = document.getElementById('input__kanzi')
-submitBtn.addEventListener('submit', getKanzi);
-input.addEventListener('input', () => {
-	submitBtn.disabled = !isValid(input.value)
-})
+// const submitBtn = document.getElementById('btn');
+// const input = document.getElementById('input__kanzi')
+// submitBtn.addEventListener('submit', getKanzi);
+// input.addEventListener('input', () => {
+// 	submitBtn.disabled = !isValid(input.value)
+// })
 
 const params = decodeURI(document.location.search)
-document.kanzi__form.selectKanzi.value = (params.substr(7)).split('&')
+document.kanzi__form.selectKanzi.value = (params.substr(3)).split('&')
 
 function getKanzi() {
 	let text = document.kanzi__form.selectKanzi.value.toLocaleLowerCase();
@@ -752,8 +752,8 @@ function getKanzi() {
 		pic.onerror = function () { document.getElementById("found__kanzi").appendChild(notFoundKandzi); }
 	}
 
-	input.value = "";
-	submitBtn.disabled = true;
+	// input.value = "";
+	// submitBtn.disabled = true;
 }
 
 // for (i = 0; i < kanzi.length; ++i) {
