@@ -694,83 +694,31 @@ const dictionary = ["一.jpg", "右.jpg", "雨.jpg", "円.jpg", "王.jpg", "音.
 	"ヲン.jpg"]
 
 const replaces = new Map([
-  ['が','か'], ['ぎ','き'],　['ぐ','く'], ['げ','け'], ['ご','こ'], ['だ','た'], ['ぢ','ち'], ['づ','つ'], ['で','て'], ['ど','と'], ['ざ','さ'], ['じ','し'], ['ず','す'], ['ぜ','せ'], ['ぞ','そ'], ['ば','は'], ['ぱ','は'], ['べ','へ'], ['ぺ','へ'], ['ぶ','ふ'], ['ぷ','ふ'], ['び','ひ'], ['ぴ','ひ'], ['ぼ','ほ'], ['ぽ','ほ'], ['ゃ','や'], ['ょ','よ'], ['ゅ','ゆ'], ['っ','つ'], ['ャ','ヤ'], ['ョ','ヨ'], ['ュ','ユ'], ['ッ','ツ'], ['ガ','カ'], ['ギ','キ'], ['グ','ク'], ['ゲ','ケ'], ['ゴ','コ'], ['ザ','サ'], ['ジ','シ'], ['ズ','ス'], ['ゼ','せ'], ['ゾ','ソ'], ['ダ','タ'], ['ヂ','チ'], ['ヅ','ツ'], ['デ','テ'], ['ド','ト'], ['バ','ハ'], ['ビ','ヒ'], ['ブ','フ'], ['ベ','ヘ'], ['ボ','ホ']])
+	['が', 'か'], ['ぎ', 'き'], ['ぐ', 'く'], ['げ', 'け'], ['ご', 'こ'], ['だ', 'た'], ['ぢ', 'ち'], ['づ', 'つ'], ['で', 'て'], ['ど', 'と'], ['ざ', 'さ'], ['じ', 'し'], ['ず', 'す'], ['ぜ', 'せ'], ['ぞ', 'そ'], ['ば', 'は'], ['ぱ', 'は'], ['べ', 'へ'], ['ぺ', 'へ'], ['ぶ', 'ふ'], ['ぷ', 'ふ'], ['び', 'ひ'], ['ぴ', 'ひ'], ['ぼ', 'ほ'], ['ぽ', 'ほ'], ['ゃ', 'や'], ['ょ', 'よ'], ['ゅ', 'ゆ'], ['っ', 'つ'], ['ャ', 'ヤ'], ['ョ', 'ヨ'], ['ュ', 'ユ'], ['ッ', 'ツ'], ['ガ', 'カ'], ['ギ', 'キ'], ['グ', 'ク'], ['ゲ', 'ケ'], ['ゴ', 'コ'], ['ザ', 'サ'], ['ジ', 'シ'], ['ズ', 'ス'], ['ゼ', 'せ'], ['ゾ', 'ソ'], ['ダ', 'タ'], ['ヂ', 'チ'], ['ヅ', 'ツ'], ['デ', 'テ'], ['ド', 'ト'], ['バ', 'ハ'], ['ビ', 'ヒ'], ['ブ', 'フ'], ['ベ', 'ヘ'], ['ボ', 'ホ']])
 
-// function isValid(value) {
-// 	return value.length >= 1
-// }
 
-// const submitBtn = document.getElementById('btn');
-// const input = document.getElementById('input__kanzi')
-// submitBtn.addEventListener('submit', getKanzi);
-// input.addEventListener('input', () => {
-// 	submitBtn.disabled = !isValid(input.value)
-// })
 
-// const params = decodeURI(document.location.search)
-let url = new URL (window.location.href)
-document.kanzi__form.input__kanzi.value = url.searchParams.get('q')
-// (params.substr(10)).split('&')
-var ele = document.getElementById("myForm");
-if(ele.addEventListener){
-    ele.addEventListener("submit", getKanzi(), false);
+const params = new URLSearchParams(window.location.search)
+const input = document.getElementById('input__kanzi');
+const container = document.getElementById('found__kanzi');
+
+const createCard = (b, i) => `<div class="card mb-3"><div class="card-body">${b}</div>${i}</div>`
+const createImage = p => p ? `<img src="./img/Dictionary/${p}" class="card-img-bottom">` : ''
+
+const replace = c => replaces.get(c) ?? c
+const render = text => container.innerHTML = [].map
+	.call(text, c => createCard(c, createImage(dictionary.find(p => p.includes(replace(c))))))
+	.join('')
+
+input.focus();
+input.select();
+input.oninput = () => {
+	render(input.value);
+
+	const p = new URLSearchParams(window.location.search)
+	if (input.value) { p.set('q', input.value) } else { p.delete('q') }
+	history.replaceState({}, '', p.toString().length > 0 ? `?${p.toString()}` : window.location.pathname)
 }
 
-function getKanzi() {
-	let text = document.kanzi__form.input__kanzi.value.toLocaleLowerCase();
-	let url = new URL (location.protocol + '//' + location.host + location.pathname)
-	url.searchParams.append("q", text)
-	window.history.pushState({}, null, url)
-	console.log(text)
-	// window.location.replace(url)
-	// console.log(url.search)
-	
-	const replace = (c) => replaces.get(c) ?? c
-
-	// let searchKanzi = document.createElement('div');
-	// searchKanzi.innerHTML = 'Мы ищем кандзи...';
-	// searchKanzi.className = "search__kanzi";
-
-	while (document.getElementById("found__kanzi").firstChild) {
-		document.getElementById("found__kanzi").removeChild(document.getElementById("found__kanzi").firstChild);
-	}
-	const result = [].map.call(text, c => ({
-		char: c,
-		page: dictionary.find(p => p.toLocaleLowerCase().includes(replace(c)))
-	}))
-
-	// const replace = (c) => replaces.get(c) ?? c
-	// console.log(replace(result.page))
-
-	const distinctPage = [... new Set(result.map(x => x.page))];
-
-	for (i = 0; i < distinctPage.length; ++i) {
-		let pic = document.createElement('img');
-		let notFoundKandzi = document.createElement('div');
-		if (!distinctPage[i]) { notFoundKandzi.innerHTML = result[i].char + ' Не найден'; }
-
-		notFoundKandzi.className = "not__found";
-		pic.src = './img/Dictionary/' + distinctPage[i];
-		pic.className = "kanzi";
-		pic.id = "myImg";
-		notFoundKandzi.className = "kanzi__notFound";
-		pic.onload = function () { document.getElementById("found__kanzi").appendChild(pic); }
-		pic.onerror = function () { document.getElementById("found__kanzi").appendChild(notFoundKandzi); }
-	}
-
-	// input.value = "";
-	// submitBtn.disabled = true;
-}
-
-// for (i = 0; i < kanzi.length; ++i) {
-// 	let pic = document.createElement('img');
-// 	let notFoundKandzi = document.createElement('div');
-// 	notFoundKandzi.innerHTML = kanzi[i] + ' Не найден';
-// 	notFoundKandzi.className = "not__found";
-// 	pic.src = './img/Dictionary/' + kanzi[i] + '.jpg';
-// 	pic.className = "kanzi";
-// 	pic.id = "myImg";
-// 	notFoundKandzi.className = "kanzi__notFound";
-// 	pic.onload = function () { document.getElementById("found__kanzi").appendChild(pic); }
-// 	pic.onerror = function () { document.getElementById("found__kanzi").appendChild(notFoundKandzi); }
-// }
+input.value = params.get('q') ?? ''
+render(input.value)

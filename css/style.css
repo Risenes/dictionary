@@ -246,6 +246,20 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
+.card {
+  margin: 20px;
+}
+
+.card-body {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.card-img-bottom {
+  height: 700px;
+  width: 500px;
+}
+
 @media (max-width: 991px) {
   .container {
     max-width: 930px;
@@ -271,6 +285,10 @@ h1, h2, h3, h4, h5, h6 {
   .input__kanzi {
     padding: 10px;
     font-size: 18px;
+  }
+  .card-body {
+    font-size: 30px;
+    font-weight: 700;
   }
 }
 
@@ -304,6 +322,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10px;
     font-size: 18px;
   }
+  .card-body {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }
 
 @media (max-width: 320px) {
@@ -335,5 +357,9 @@ h1, h2, h3, h4, h5, h6 {
   .input__kanzi {
     padding: 10px;
     font-size: 18px;
+  }
+  .card-body {
+    font-size: 20px;
+    font-weight: 700;
   }
 }

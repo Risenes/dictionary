@@ -161,6 +161,20 @@ $fontfamily: "Noto Serif";
 	cursor: pointer;
 }
 
+.card {
+  margin: 20px;
+} 
+
+.card-body {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.card-img-bottom {
+  height: 700px;
+  width: 500px;
+}
+
 @media (max-width: 991px) {
   .container {
     max-width: 930px;
@@ -195,6 +209,10 @@ $fontfamily: "Noto Serif";
     padding: 10px;
     font-size: 18px;
   }
+  .card-body {
+    font-size: 30px;
+    font-weight: 700;
+  }
 }
 
 @media (max-width: 575px) {
@@ -228,6 +246,10 @@ $fontfamily: "Noto Serif";
     padding: 10px;
     font-size: 18px;
   }
+  .card-body {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }
 
 @media (max-width: 320px) {
@@ -260,5 +282,9 @@ $fontfamily: "Noto Serif";
   .input__kanzi {
     padding: 10px;
     font-size: 18px;
+  }
+  .card-body {
+    font-size: 20px;
+    font-weight: 700;
   }
 }
